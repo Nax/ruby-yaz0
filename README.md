@@ -10,7 +10,7 @@ A simple gem to compress/decompress data using the Yaz0 compression algorithm.
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/Nax/yaz0.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Nax/ruby-yaz0.
 
 
 ## License

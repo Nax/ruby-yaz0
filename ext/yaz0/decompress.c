@@ -23,13 +23,14 @@ int yaz0Decompress(Yaz0Buffer *dst, const char *d, size_t dataLen)
 
     inCursor = 0x10;
     dst->data = realloc(dst->data, dstSize);
+    dst->capacity = dstSize;
 
-    while (inCursor < dataLen)
+    while (inCursor < dataLen && dst->size < dstSize)
     {
         group = data[inCursor++];
         for (int b = 0; b < 8; ++b)
         {
-            if (inCursor >= dataLen)
+            if (inCursor >= dataLen || dst->size >= dstSize)
                 break;
 
             if (group & (1 << (7 - b)))

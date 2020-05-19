@@ -68,7 +68,7 @@ typedef struct
     Yaz0Buffer *dst;
     const char *data;
     uint32_t dataSize;
-    uint32_t inCursor;
+    int32_t inCursor;
 } Yaz0Compressor;
 
 static int runCost(const Yaz0Run *run)
@@ -196,7 +196,7 @@ static void makeRun(Yaz0Run *dst, Yaz0Compressor *compressor, int dataOnly)
     Yaz0Run tmp;
 
     makeRunNone(dst);
-    if (compressor->inCursor == compressor->dataSize)
+    if (compressor->inCursor >= compressor->dataSize)
         return;
     /* Get the basic data run */
     makeRunData(dst, compressor->data[compressor->inCursor]);
@@ -204,7 +204,7 @@ static void makeRun(Yaz0Run *dst, Yaz0Compressor *compressor, int dataOnly)
     {
         makeRunNone(&tmp);
         makeMatch(&tmp, compressor);
-        bestRun(dst, &tmp, dst);
+        bestRun(dst, dst, &tmp);
     }
 }
 

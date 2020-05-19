@@ -17,4 +17,23 @@ RSpec.describe Yaz0 do
     expect(a_compressed.size).to be < a.size
     expect(Yaz0.decompress(a_compressed)).to eq(a)
   end
+
+  it "compresses identically" do
+    data0 = Yaz0.compress("A" * 8192)
+    data1 = Yaz0.compress("A" * 8192)
+    expect(data0).to eq(data1)
+  end
+
+  it "decompresses identically" do
+    cdata = Yaz0.compress("A" * 8192)
+    data0 = Yaz0.decompress(cdata)
+    data1 = Yaz0.decompress(cdata)
+    expect(data0).to eq(data1)
+  
+    cdata0 = Yaz0.compress("A" * 8192)
+    cdata1 = Yaz0.compress("A" * 8192)
+    data0 = Yaz0.decompress(cdata0)
+    data1 = Yaz0.decompress(cdata1)
+    expect(data0).to eq(data1)
+  end
 end

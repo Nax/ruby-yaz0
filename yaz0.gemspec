@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
     "spec/**/*",
     "libyaz0/include/**/*",
     "libyaz0/src/libyaz0/**/*",
-    "LICENSE",
+    "LICENSE.txt",
     "README.md",
     "Gemfile",
     "Rakefile",

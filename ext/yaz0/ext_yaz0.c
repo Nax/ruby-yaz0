@@ -106,9 +106,9 @@ run(VALUE self, VALUE io_in, VALUE io_out, int compress, int size, int level)
             break;
         case YAZ0_NEED_AVAIL_OUT:
             /* Need more output */
-            rb_str_set_len(buffer_out, yaz0OutputChunkSize(s));
+            rb_str_resize(buffer_out, yaz0OutputChunkSize(s));
             rb_funcall(io_out, rb_intern("write"), 1, buffer_out);
-            rb_str_set_len(buffer_out, BUFSIZE);
+            rb_str_resize(buffer_out, BUFSIZE);
             yaz0Output(s, RSTRING_PTR(buffer_out), BUFSIZE);
             break;
         case YAZ0_BAD_MAGIC:
@@ -123,7 +123,7 @@ run(VALUE self, VALUE io_in, VALUE io_out, int compress, int size, int level)
 
 end:
     /* There might still be unflushed output */
-    rb_str_set_len(buffer_out, yaz0OutputChunkSize(s));
+    rb_str_resize(buffer_out, yaz0OutputChunkSize(s));
     rb_funcall(io_out, rb_intern("write"), 1, buffer_out);
 
     rb_gc_unregister_address(&buffer_in);
